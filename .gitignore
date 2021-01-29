@@ -1,5 +1,7 @@
 # Visual Studio 2015 user specific files
 .vs/
+.vscode/
+*.code-workspace
 
 # Compiled Object files
 *.slo
@@ -12,9 +14,10 @@
 *.pch
 
 # Compiled Dynamic libraries
-*.so
+# *.so
 *.dylib
-*.dll
+# *.dll
+*.pdb
 
 # Fortran module files
 *.mod
@@ -26,7 +29,7 @@
 *.lib
 
 # Executables
-*.exe
+# *.exe
 *.out
 *.app
 *.ipa
@@ -46,8 +49,8 @@ SourceArt/**/*.png
 SourceArt/**/*.tga
 
 # Binary Files
-Binaries/*
-Plugins/*/Binaries/*
+# Binaries/*
+# Plugins/*/Binaries/*
 
 # Builds
 Build/*
@@ -72,3 +75,5 @@ Plugins/*/Intermediate/*
 
 # Cache files for the editor to use
 DerivedDataCache/*
+
+.ignore
