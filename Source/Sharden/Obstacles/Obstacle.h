@@ -23,5 +23,5 @@ private:
     void ProcessMovement(float DeltaTime);
 
 private:
-    float Speed = 10.0f;
+    float Speed = 1.0f;
 };
