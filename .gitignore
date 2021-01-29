@@ -14,9 +14,10 @@
 *.pch
 
 # Compiled Dynamic libraries
-*.so
+# *.so
 *.dylib
-*.dll
+# *.dll
+*.pdb
 
 # Fortran module files
 *.mod
@@ -28,7 +29,7 @@
 *.lib
 
 # Executables
-*.exe
+# *.exe
 *.out
 *.app
 *.ipa
@@ -48,8 +49,8 @@ SourceArt/**/*.png
 SourceArt/**/*.tga
 
 # Binary Files
-Binaries/*
-Plugins/*/Binaries/*
+# Binaries/*
+# Plugins/*/Binaries/*
 
 # Builds
 Build/*
