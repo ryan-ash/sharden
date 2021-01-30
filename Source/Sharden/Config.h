@@ -33,5 +33,9 @@ public:
     UPROPERTY(EditAnywhere, Category = Obstacle)
     float MaxAngleDelta = 45.0f;
     UPROPERTY(EditAnywhere, Category = Obstacle)
+    float MinHeightDelta = 0.0f;
+    UPROPERTY(EditAnywhere, Category = Obstacle)
+    float MaxHeightDelta = 100.0f;
+    UPROPERTY(EditAnywhere, Category = Obstacle)
     TArray <TSubclassOf<class AObstacle>> Obstacles;
 };

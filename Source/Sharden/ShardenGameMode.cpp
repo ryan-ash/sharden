@@ -72,6 +72,8 @@ void AShardenGameMode::SpawnObstacle()
         const auto SelectedObstacle = CurrentSpawnParameters->Obstacles[SelectelObstacleI];
         const auto Obstacle = GetWorld()->SpawnActor<AObstacle>(SelectedObstacle, FVector(X, FMath::RandRange(-CurrentSpawnParameters->Width, CurrentSpawnParameters->Width), Z), FRotator(0, 0, 0), SpawnInfo);
         Obstacle->SetActorScale3D(Obstacle->GetActorScale() * FMath::RandRange(CurrentSpawnParameters->MinSizeDelta, CurrentSpawnParameters->MaxSizeDelta));
+        const float Offset = FMath::RandRange(CurrentSpawnParameters->MinHeightDelta, CurrentSpawnParameters->MaxHeightDelta);
+        Obstacle->SetHeightOffset(Offset);
     }
 }
 

@@ -16,7 +16,6 @@ AObstacle::AObstacle()
 void AObstacle::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
 void AObstacle::Tick(float DeltaTime)
@@ -54,7 +53,11 @@ void AObstacle::ProcessMovement(float DeltaTime)
     }
     const float X = Config::GroundRadius * FMath::Cos(AddAngle);
     const float Z = Config::GroundRadius * FMath::Sin(AddAngle);
-	SetActorLocation(FVector(X, CurrentLocation.Y, Z));
-	const FVector TargetLocation(X, CurrentLocation.Y, Z);
+	const FVector TargetLocation(X, CurrentLocation.Y, Z + HeightOffset);
 	SetActorLocationAndRotation(TargetLocation, UKismetMathLibrary::FindLookAtRotation(CurrentLocation, TargetLocation));
+}
+
+void AObstacle::SetHeightOffset(float Offset)
+{
+	HeightOffset = Offset;
 }
