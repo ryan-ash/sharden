@@ -1,6 +1,10 @@
 #include "Obstacle.h"
 
-#include "Kismet/KismetMathLibrary.h"
+#include <Engine/World.h>
+#include <GameFramework/Pawn.h>
+#include <Kismet/KismetMathLibrary.h>
+
+#include "Sharden/ShardenGameMode.h"
 
 #include "Sharden/Config.h"
 
@@ -23,7 +27,19 @@ void AObstacle::Tick(float DeltaTime)
 
 void AObstacle::OnOverlap(AActor* OtherActor)
 {
-	UE_LOG(LogTemp, Error, TEXT("Collision!"));
+	const APawn* Pawn = Cast<APawn>(OtherActor);
+	if (Pawn)
+	{
+		const auto GM = GetWorld()->GetAuthGameMode<AShardenGameMode>();
+		if (GM)
+		{
+			GM->RegisterPlayerHit();
+		}
+		else
+		{
+			UE_LOG(LogTemp, Error, TEXT("GameMode isn't set to ShardenGameMode!"));
+		}
+	}
 }
 
 void AObstacle::ProcessMovement(float DeltaTime)
@@ -33,7 +49,8 @@ void AObstacle::ProcessMovement(float DeltaTime)
 	float AddAngle = DeltaTime * Speed + CurrentAngle;
 	if (AddAngle > PI)
 	{
-		AddAngle = 0.0f;
+		Destroy();
+		return;
     }
     const float X = Config::GroundRadius * FMath::Cos(AddAngle);
     const float Z = Config::GroundRadius * FMath::Sin(AddAngle);
