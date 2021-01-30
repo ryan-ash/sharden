@@ -24,10 +24,15 @@ public:
 
     UFUNCTION(BlueprintCallable)
     void SpawnObstacle(const FSpawnParameters Parameters);
+
+    UFUNCTION(BlueprintCallable)
+    void SetObstaclesSpawnable(bool Spawnable);
+
 public:
     UPROPERTY(EditAnywhere)
     TSubclassOf<class AObstacle> ObstacleClass;
 
 private:
     float SpawnTime = 0.0f;
+    bool ObstaclesSpawnable = false;
 };

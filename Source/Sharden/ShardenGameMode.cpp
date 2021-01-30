@@ -16,8 +16,17 @@ void AShardenGameMode::Tick_Impl(float DeltaSeconds)
     }
 }
 
+void AShardenGameMode::SetObstaclesSpawnable(bool Spawnable)
+{
+    ObstaclesSpawnable = Spawnable;
+}
+
 void AShardenGameMode::SpawnObstacle(const FSpawnParameters Parameters)
 {
+    if (!ObstaclesSpawnable)
+    {
+        return;
+    }
     FActorSpawnParameters SpawnInfo;
 
     const auto CurrentAngle = FMath::DegreesToRadians(-180.0f);

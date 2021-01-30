@@ -21,6 +21,11 @@ void AObstacle::Tick(float DeltaTime)
 	ProcessMovement(DeltaTime);
 }
 
+void AObstacle::OnOverlap(AActor* OtherActor)
+{
+	UE_LOG(LogTemp, Error, TEXT("Collision!"));
+}
+
 void AObstacle::ProcessMovement(float DeltaTime)
 {
 	const auto CurrentLocation = GetActorLocation();
