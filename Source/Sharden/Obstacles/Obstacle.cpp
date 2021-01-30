@@ -16,7 +16,6 @@ AObstacle::AObstacle()
 void AObstacle::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
 void AObstacle::Tick(float DeltaTime)
@@ -45,16 +44,30 @@ void AObstacle::OnOverlap(AActor* OtherActor)
 void AObstacle::ProcessMovement(float DeltaTime)
 {
 	const auto CurrentLocation = GetActorLocation();
-	const float CurrentAngle = FMath::Acos(CurrentLocation.X / Config::GroundRadius);
+	const float CurrentAngle = FMath::Acos(CurrentLocation.X / Radius);
 	float AddAngle = DeltaTime * Speed + CurrentAngle;
 	if (AddAngle > PI)
 	{
 		Destroy();
 		return;
     }
-    const float X = Config::GroundRadius * FMath::Cos(AddAngle);
-    const float Z = Config::GroundRadius * FMath::Sin(AddAngle);
-	SetActorLocation(FVector(X, CurrentLocation.Y, Z));
-	const FVector TargetLocation(X, CurrentLocation.Y, Z);
+    const float X = Radius * FMath::Cos(AddAngle);
+    const float Z = Radius * FMath::Sin(AddAngle);
+	const FVector TargetLocation(X, CurrentLocation.Y, Z + HeightOffset);
 	SetActorLocationAndRotation(TargetLocation, UKismetMathLibrary::FindLookAtRotation(CurrentLocation, TargetLocation));
+}
+
+void AObstacle::SetHeightOffset(float Offset)
+{
+	HeightOffset = Offset;
+}
+
+void AObstacle::SetSpeed(float InSpeed)
+{
+	Speed = InSpeed;
+}
+
+void AObstacle::SetRadius(float InRadius)
+{
+	Radius = InRadius;
 }
