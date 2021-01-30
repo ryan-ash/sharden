@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.00.00">
+	<object class="AudioFile" id="{4803d0cc-67c7-40b7-a68b-59c920ac8193}">
+		<property name="assetPath">
+			<value>125919__klankbeeld__horror-what-are-you-doing-here-cathedral.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>7.6399999999999997</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{677ed839-555f-4c63-aac3-25cd555b28ba}</destination>
+		</relationship>
+	</object>
+</objects>
