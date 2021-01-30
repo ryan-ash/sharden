@@ -38,6 +38,9 @@ public:
     UPROPERTY(EditAnywhere)
     TSubclassOf<class AObstacle> ObstacleClass;
 
+    UPROPERTY(EditAnywhere)
+    float GroundRadius = 3000.0f;
+
 private:
     float SpawnTime = 0.0f;
     bool ObstaclesSpawnable = false;

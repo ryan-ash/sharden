@@ -66,14 +66,16 @@ void AShardenGameMode::SpawnObstacle()
     {
         FActorSpawnParameters SpawnInfo;
         const auto CurrentAngle = FMath::DegreesToRadians(FMath::RandRange(CurrentSpawnParameters->MinAngleDelta, CurrentSpawnParameters->MaxAngleDelta));
-        const float X = Config::GroundRadius * FMath::Cos(CurrentAngle);
-        const float Z = Config::GroundRadius * FMath::Sin(CurrentAngle);
+        const float X = GroundRadius * FMath::Cos(CurrentAngle);
+        const float Z = GroundRadius * FMath::Sin(CurrentAngle);
         const int32 SelectelObstacleI = FMath::RandRange(0, CurrentSpawnParameters->Obstacles.Num() - 1);
         const auto SelectedObstacle = CurrentSpawnParameters->Obstacles[SelectelObstacleI];
         const auto Obstacle = GetWorld()->SpawnActor<AObstacle>(SelectedObstacle, FVector(X, FMath::RandRange(-CurrentSpawnParameters->Width, CurrentSpawnParameters->Width), Z), FRotator(0, 0, 0), SpawnInfo);
         Obstacle->SetActorScale3D(Obstacle->GetActorScale() * FMath::RandRange(CurrentSpawnParameters->MinSizeDelta, CurrentSpawnParameters->MaxSizeDelta));
         const float Offset = FMath::RandRange(CurrentSpawnParameters->MinHeightDelta, CurrentSpawnParameters->MaxHeightDelta);
+        Obstacle->SetRadius(GroundRadius);
         Obstacle->SetHeightOffset(Offset);
+        Obstacle->SetSpeed(CurrentSpawnParameters->MovementSpeed);
     }
 }
 

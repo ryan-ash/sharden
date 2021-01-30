@@ -4,12 +4,6 @@
 
 #include "Config.generated.h"
 
-class Config
-{
-public:
-    static const float GroundRadius;
-};
-
 UCLASS()
 class SHARDEN_API USpawnData : public UPrimaryDataAsset
 {
@@ -18,6 +12,8 @@ class SHARDEN_API USpawnData : public UPrimaryDataAsset
 public:
     UPROPERTY(EditAnywhere, Category = Obstacle)
     float SpawnTime = 2.5f;
+    UPROPERTY(EditAnywhere, Category = Obstacle)
+    float MovementSpeed = 1.0f;
     UPROPERTY(EditAnywhere, Category = Obstacle)
     float Width = 500.0f;
     UPROPERTY(EditAnywhere, Category = Obstacle)
