@@ -1,17 +1,12 @@
 #pragma once
 
-#include "CoreMinimal.h"
-#include "GameFramework/GameModeBase.h"
+#include <CoreMinimal.h>
+#include <Engine/DataTable.h>
+#include <GameFramework/GameModeBase.h>
+
+#include "Sharden/Config.h"
+
 #include "ShardenGameMode.generated.h"
-
-USTRUCT(BlueprintType)
-struct SHARDEN_API FSpawnParameters
-{
-    GENERATED_BODY()
-
-    float Width;
-    float Size;
-};
 
 UCLASS()
 class SHARDEN_API AShardenGameMode : public AGameModeBase
@@ -23,11 +18,31 @@ public:
     void Tick_Impl(float DeltaSeconds);
 
     UFUNCTION(BlueprintCallable)
-    void SpawnObstacle(const FSpawnParameters Parameters);
+    void PlayStart();
+
+    UFUNCTION(BlueprintCallable)
+    void PlayEnd();
+
+    UFUNCTION(BlueprintCallable)
+    void SpawnObstacle();
+
+    UFUNCTION(BlueprintCallable)
+    void SetObstaclesSpawnable(bool Spawnable);
+
+    UFUNCTION(BlueprintCallable)
+    void SetSpawnParameters(USpawnData* Params);
+
+    void RegisterPlayerHit();
+
 public:
     UPROPERTY(EditAnywhere)
     TSubclassOf<class AObstacle> ObstacleClass;
 
+    UPROPERTY(EditAnywhere)
+    float GroundRadius = 3000.0f;
+
 private:
     float SpawnTime = 0.0f;
+    bool ObstaclesSpawnable = false;
+    USpawnData* CurrentSpawnParameters;
 };
