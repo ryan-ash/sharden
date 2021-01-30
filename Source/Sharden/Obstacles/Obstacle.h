@@ -19,6 +19,9 @@ protected:
 public:
     virtual void Tick(float DeltaTime) override;
 
+    UFUNCTION(BlueprintCallable)
+    void OnOverlap(AActor* OtherActor);
+
 private:
     void ProcessMovement(float DeltaTime);
 
