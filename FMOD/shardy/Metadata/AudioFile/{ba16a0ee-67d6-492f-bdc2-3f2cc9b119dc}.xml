@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.00.00">
+	<object class="AudioFile" id="{ba16a0ee-67d6-492f-bdc2-3f2cc9b119dc}">
+		<property name="assetPath">
+			<value>acidfall.mp3</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>258.06367346938777</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{677ed839-555f-4c63-aac3-25cd555b28ba}</destination>
+		</relationship>
+	</object>
+</objects>
