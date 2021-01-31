@@ -5,7 +5,7 @@
 			"app_key": "application.generated.ue.virtual-reality-bp-game-template-14830424.ue4editor.exe",
 			"launch_type": "url",
 			"url": "steam://launch/",
-			"action_manifest_path": "E:/Work/git/jammy-21/Config/SteamVRBindings/steamvr_manifest.json",
+			"action_manifest_path": "S:/Jam/jammy-21/Config/SteamVRBindings/steamvr_manifest.json",
 			"strings":
 			{
 				"en_us":

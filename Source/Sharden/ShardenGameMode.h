@@ -14,6 +14,7 @@ class SHARDEN_API AShardenGameMode : public AGameModeBase
 	GENERATED_BODY()
 
 public:
+
     UFUNCTION(BlueprintCallable)
     void Tick_Impl(float DeltaSeconds);
 
@@ -32,10 +33,23 @@ public:
     UFUNCTION(BlueprintCallable)
     void SetSpawnParameters(USpawnData* Params);
 
+    UFUNCTION(BlueprintCallable)
     void RegisterPlayerHit();
 
     UFUNCTION(BlueprintCallable)
+    void RegisterPlayerHeal();
+
+    UFUNCTION(BlueprintCallable)
     void ResetHitpoints();
+
+    UFUNCTION(BlueprintCallable)
+    int32 GetMaxHitpoint() const;
+
+    UFUNCTION(BlueprintCallable)
+    int32 GetCurrentHitpoint() const;
+
+    UFUNCTION(BlueprintCallable)
+    int32 GetMaxFragments() const;
 
     UFUNCTION(BlueprintCallable)
     void ReceiveDamage(int32 InDamage);
@@ -49,7 +63,13 @@ public:
     UFUNCTION(BlueprintImplementableEvent)
     void OnGameWon();
 
+protected:
+
+    UFUNCTION(BlueprintImplementableEvent)
+    void NewHitpoints(const int32& Hippoints);
+
 public:
+
     UPROPERTY(EditAnywhere)
     TSubclassOf<class AObstacle> ObstacleClass;
 
@@ -57,6 +77,7 @@ public:
     float GroundRadius = 3000.0f;
 
 private:
+
     int32 HitPoints = 100;
     float PlayTime = 0.0f;
     float SpawnTime = 0.0f;
