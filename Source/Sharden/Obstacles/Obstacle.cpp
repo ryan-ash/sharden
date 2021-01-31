@@ -91,7 +91,7 @@ void AObstacle::ResetCanInteract()
 
 void AObstacle::Collapse()
 {
-	if(!Destructible)
+	if(Destructible)
 	{
 		const auto GM = GetWorld()->GetAuthGameMode<AShardenGameMode>();
 		if (GM)
