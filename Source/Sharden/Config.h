@@ -38,7 +38,9 @@ public:
     UPROPERTY(EditAnywhere, Category = Obstacle)
     float PlayTime = 60.0f;
     UPROPERTY(EditAnywhere, Category = Obstacle)
-    int32 TotalHitPoints = 100;
+    int32 TotalHitPoints = 50;
+    UPROPERTY(EditAnywhere, Category = Obstacle)
+    int32 MaxHitPoints = 100;
     UPROPERTY(EditAnywhere, Category = Obstacle)
     int32 DamageValue = 20;
     UPROPERTY(EditAnywhere, Category = Obstacle)
@@ -49,6 +51,8 @@ public:
     int32 MinCount = 1;
     UPROPERTY(EditAnywhere, Category = Obstacle)
     int32 MaxCount = 3;
+    UPROPERTY(EditAnywhere, Category = Obstacle)
+    int32 MaxFragments = 20;
     UPROPERTY(EditAnywhere, Category = Obstacle)
     TArray <TSubclassOf<class AObstacle>> Obstacles;
     UPROPERTY(EditAnywhere, Category = Obstacle)

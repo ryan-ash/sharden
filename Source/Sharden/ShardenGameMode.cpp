@@ -114,6 +114,7 @@ void AShardenGameMode::HealUp(int32 InHeal)
     {
         HitPoints = CurrentSpawnParameters->TotalHitPoints;
     }
+    NewHitpoints(HitPoints);
 }
 
 void AShardenGameMode::ReceiveDamage(int32 InDamage)
@@ -124,9 +125,26 @@ void AShardenGameMode::ReceiveDamage(int32 InDamage)
         PlayEnd();
         OnGameLost();
     }
+    NewHitpoints(HitPoints);
 }
 
 void AShardenGameMode::ResetHitpoints()
 {
     HitPoints = CurrentSpawnParameters->TotalHitPoints;
+    NewHitpoints(HitPoints);
+}
+
+int32 AShardenGameMode::GetMaxHitpoint() const
+{
+    return CurrentSpawnParameters->MaxHitPoints;
+}
+
+int32 AShardenGameMode::GetCurrentHitpoint() const
+{
+    return HitPoints;
+}
+
+int32 AShardenGameMode::GetMaxFragments() const
+{
+    return CurrentSpawnParameters->MaxFragments;
 }
