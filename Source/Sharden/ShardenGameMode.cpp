@@ -64,18 +64,24 @@ void AShardenGameMode::SpawnObstacle()
 
     for (int i = 0; i < SpawnCount; ++i)
     {
-        FActorSpawnParameters SpawnInfo;
-        const auto CurrentAngle = FMath::DegreesToRadians(FMath::RandRange(CurrentSpawnParameters->MinAngleDelta, CurrentSpawnParameters->MaxAngleDelta));
+        const int32 SelectedObstacleI = FMath::RandRange(0, CurrentSpawnParameters->Obstacles.Num() - 1);
+        const auto SelectedObstacle = CurrentSpawnParameters->Obstacles[SelectedObstacleI];
+        if (!CurrentSpawnParameters->Obstacles.Contains(SelectedObstacle))
+        {
+            UE_LOG(LogTemp, Error, TEXT("Obstacle doesn't have params struct!"));
+            return;
+        }
+        const auto ObstacleData = CurrentSpawnParameters->ObstaclesDataMap[SelectedObstacle];
+        const auto CurrentAngle = FMath::DegreesToRadians(FMath::RandRange(ObstacleData.MinAngleDelta, ObstacleData.MaxAngleDelta));
         const float X = GroundRadius * FMath::Cos(CurrentAngle);
         const float Z = GroundRadius * FMath::Sin(CurrentAngle);
-        const int32 SelectelObstacleI = FMath::RandRange(0, CurrentSpawnParameters->Obstacles.Num() - 1);
-        const auto SelectedObstacle = CurrentSpawnParameters->Obstacles[SelectelObstacleI];
+        FActorSpawnParameters SpawnInfo;
         const auto Obstacle = GetWorld()->SpawnActor<AObstacle>(SelectedObstacle, FVector(X, FMath::RandRange(-CurrentSpawnParameters->Width, CurrentSpawnParameters->Width), Z), FRotator(0, 0, 0), SpawnInfo);
-        Obstacle->SetActorScale3D(Obstacle->GetActorScale() * FMath::RandRange(CurrentSpawnParameters->MinSizeDelta, CurrentSpawnParameters->MaxSizeDelta));
-        const float Offset = FMath::RandRange(CurrentSpawnParameters->MinHeightDelta, CurrentSpawnParameters->MaxHeightDelta);
+        Obstacle->SetActorScale3D(Obstacle->GetActorScale() * FMath::RandRange(ObstacleData.MinSizeDelta, ObstacleData.MaxSizeDelta));
+        const float Offset = FMath::RandRange(ObstacleData.MinHeightDelta, ObstacleData.MaxHeightDelta);
         Obstacle->SetRadius(GroundRadius);
         Obstacle->SetHeightOffset(Offset);
-        Obstacle->SetSpeed(CurrentSpawnParameters->MovementSpeed);
+        Obstacle->SetSpeed(ObstacleData.MovementSpeed);
     }
 }
 
