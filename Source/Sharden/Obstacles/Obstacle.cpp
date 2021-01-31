@@ -91,11 +91,14 @@ void AObstacle::ResetCanInteract()
 
 void AObstacle::Collapse()
 {
-	const auto GM = GetWorld()->GetAuthGameMode<AShardenGameMode>();
-	if (GM)
+	if(!Destructible)
 	{
-		GM->RegisterPlayerHeal();
-	}
-	EndWhipeInteract.Broadcast();
-	CollapseEvent();	
+		const auto GM = GetWorld()->GetAuthGameMode<AShardenGameMode>();
+		if (GM)
+		{
+			GM->RegisterPlayerHeal();
+		}
+		EndWhipeInteract.Broadcast();
+		CollapseEvent();
+	}	
 }
