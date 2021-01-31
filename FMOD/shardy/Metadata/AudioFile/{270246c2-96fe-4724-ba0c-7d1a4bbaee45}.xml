@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.00.00">
+	<object class="AudioFile" id="{270246c2-96fe-4724-ba0c-7d1a4bbaee45}">
+		<property name="assetPath">
+			<value>86049__nextmaking__sword.aiff</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>1.6367708333333333</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{677ed839-555f-4c63-aac3-25cd555b28ba}</destination>
+		</relationship>
+	</object>
+</objects>

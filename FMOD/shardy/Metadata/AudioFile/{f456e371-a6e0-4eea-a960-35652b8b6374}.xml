@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.00.00">
+	<object class="AudioFile" id="{f456e371-a6e0-4eea-a960-35652b8b6374}">
+		<property name="assetPath">
+			<value>547036__eponn__hit-impact-sword-2.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>1.2090249433106577</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{677ed839-555f-4c63-aac3-25cd555b28ba}</destination>
+		</relationship>
+	</object>
+</objects>

@@ -2,23 +2,28 @@
 
 #include <Kismet/GameplayStatics.h>
 
-#include "Sharden/Config.h"
 #include "Sharden/Obstacles/Obstacle.h"
 
 void AShardenGameMode::Tick_Impl(float DeltaSeconds)
 {
     SpawnTime += DeltaSeconds;
-    if (SpawnTime > Config::SpawnTime)
+    PlayTime += DeltaSeconds;
+
+    if (!CurrentSpawnParameters)
     {
-        SpawnTime /= Config::SpawnTime;
-        FSpawnParameters Params;
-        Params.Size = 1.0f;
-        Params.Width = 500.0f;
-        Params.MinCount = 1;
-        Params.MaxCount = 3;
-        Params.MinAngleDelta = 0.0f;
-        Params.MaxAngleDelta = 45.0f;
-        SpawnObstacle(Params);
+        UE_LOG(LogTemp, Error, TEXT("Spawn parameters nullptr!"));
+        return;
+    }
+
+    if (PlayTime > CurrentSpawnParameters->PlayTime)
+    {
+        // TODO: Win
+    }
+    const float DifficultyValue = CurrentSpawnParameters->DifficultyCurve->GetFloatValue(PlayTime);
+    if (SpawnTime > CurrentSpawnParameters->SpawnTime / DifficultyValue)
+    {
+        SpawnTime = 0.0f;
+        SpawnObstacle();
     }
 }
 
@@ -35,6 +40,7 @@ void AShardenGameMode::RegisterPlayerHit()
 
 void AShardenGameMode::PlayStart()
 {
+    PlayTime = 0.0f;
     SetObstaclesSpawnable(true);
 }
 
@@ -49,22 +55,45 @@ void AShardenGameMode::PlayEnd()
     }
 }
 
-void AShardenGameMode::SpawnObstacle(const FSpawnParameters Parameters)
+void AShardenGameMode::SpawnObstacle()
 {
     if (!ObstaclesSpawnable)
     {
         return;
     }
 
-    const int32 SpawnCount = FMath::RandRange(Parameters.MinCount, Parameters.MaxCount);
+    if (!CurrentSpawnParameters)
+    {
+        UE_LOG(LogTemp, Error, TEXT("Spawn parameters nullptr!"));
+        return;
+    }
+
+    const int32 SpawnCount = FMath::RandRange(CurrentSpawnParameters->MinCount, CurrentSpawnParameters->MaxCount);
 
     for (int i = 0; i < SpawnCount; ++i)
     {
+        const int32 SelectedObstacleI = FMath::RandRange(0, CurrentSpawnParameters->Obstacles.Num() - 1);
+        const auto SelectedObstacle = CurrentSpawnParameters->Obstacles[SelectedObstacleI];
+        if (!CurrentSpawnParameters->Obstacles.Contains(SelectedObstacle))
+        {
+            UE_LOG(LogTemp, Error, TEXT("Obstacle doesn't have params struct!"));
+            return;
+        }
+        const auto ObstacleData = CurrentSpawnParameters->ObstaclesDataMap[SelectedObstacle];
+        const auto CurrentAngle = FMath::DegreesToRadians(FMath::RandRange(ObstacleData.MinAngleDelta, ObstacleData.MaxAngleDelta));
+        const float X = GroundRadius * FMath::Cos(CurrentAngle);
+        const float Z = GroundRadius * FMath::Sin(CurrentAngle);
         FActorSpawnParameters SpawnInfo;
-        const auto CurrentAngle = FMath::DegreesToRadians(FMath::RandRange(Parameters.MinAngleDelta, Parameters.MaxAngleDelta));
-        const float X = Config::GroundRadius * FMath::Cos(CurrentAngle);
-        const float Z = Config::GroundRadius * FMath::Sin(CurrentAngle);
-        const auto Obstacle = GetWorld()->SpawnActor<AObstacle>(ObstacleClass, FVector(X, FMath::RandRange(-Parameters.Width, Parameters.Width), Z), FRotator(0, 0, 0), SpawnInfo);
-        Obstacle->SetActorScale3D(Obstacle->GetActorScale() * Parameters.Size);
+        const auto Obstacle = GetWorld()->SpawnActor<AObstacle>(SelectedObstacle, FVector(X, FMath::RandRange(-CurrentSpawnParameters->Width, CurrentSpawnParameters->Width), Z), FRotator(0, 0, 0), SpawnInfo);
+        Obstacle->SetActorScale3D(Obstacle->GetActorScale() * FMath::RandRange(ObstacleData.MinSizeDelta, ObstacleData.MaxSizeDelta));
+        const float Offset = FMath::RandRange(ObstacleData.MinHeightDelta, ObstacleData.MaxHeightDelta);
+        Obstacle->SetRadius(GroundRadius);
+        Obstacle->SetHeightOffset(Offset);
+        Obstacle->SetSpeed(ObstacleData.MovementSpeed);
     }
+}
+
+void AShardenGameMode::SetSpawnParameters(USpawnData* Params)
+{
+    CurrentSpawnParameters = Params;
 }
