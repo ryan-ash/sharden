@@ -38,6 +38,10 @@ public:
     UPROPERTY(EditAnywhere, Category = Obstacle)
     float PlayTime = 60.0f;
     UPROPERTY(EditAnywhere, Category = Obstacle)
+    int32 TotalHitPoints = 100;
+    UPROPERTY(EditAnywhere, Category = Obstacle)
+    int32 DamageValue = 20;
+    UPROPERTY(EditAnywhere, Category = Obstacle)
     float SpawnTime = 2.5f;
     UPROPERTY(EditAnywhere, Category = Obstacle)
     float Width = 500.0f;
