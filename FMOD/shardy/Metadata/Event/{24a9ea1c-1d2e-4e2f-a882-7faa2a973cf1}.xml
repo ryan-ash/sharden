@@ -72,6 +72,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerMaster" id="{07e0c3ef-936c-4577-a0b7-d6f88c05a368}">
+		<property name="volume">
+			<value>1</value>
+		</property>
 		<relationship name="effectChain">
 			<destination>{454a5da4-ff24-4e54-8086-f13275022ecd}</destination>
 		</relationship>
@@ -97,6 +100,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{63fdb4da-509c-4215-a66c-07bbad529000}">
+		<property name="volume">
+			<value>-28.5</value>
+		</property>
 		<property name="name">
 			<value>Audio 1</value>
 		</property>
@@ -114,6 +120,8 @@
 		<relationship name="effects">
 			<destination>{58d95942-1a4a-4777-b9e6-d53156286dc5}</destination>
 			<destination>{e01f4cf6-fcb7-4e6b-8fe2-550d4e7728d6}</destination>
+			<destination>{0e02775a-ad57-41ec-86fb-6c7a54b7952c}</destination>
+			<destination>{6cd6bb4f-4571-4be7-b51c-37e9a506bb64}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{88ee2d32-8895-429a-a35c-6d83842906cf}" />
@@ -125,6 +133,41 @@
 	</object>
 	<object class="MixerBusPanner" id="{4e45bdf0-d3a8-461f-ab25-0586ab230df6}" />
 	<object class="MixerBusFader" id="{58d95942-1a4a-4777-b9e6-d53156286dc5}" />
-	<object class="SpatialiserEffect" id="{e01f4cf6-fcb7-4e6b-8fe2-550d4e7728d6}" />
+	<object class="SpatialiserEffect" id="{e01f4cf6-fcb7-4e6b-8fe2-550d4e7728d6}">
+		<property name="distanceRolloffType">
+			<value>1</value>
+		</property>
+		<property name="extentMode">
+			<value>1</value>
+		</property>
+		<property name="soundSize">
+			<value>2.79999995</value>
+		</property>
+		<property name="minimumExtent">
+			<value>318</value>
+		</property>
+	</object>
+	<object class="PitchShifterEffect" id="{0e02775a-ad57-41ec-86fb-6c7a54b7952c}">
+		<property name="fftSize">
+			<value>3560</value>
+		</property>
+		<property name="overlap">
+			<value>15.6000004</value>
+		</property>
+	</object>
+	<object class="ThreeEQEffect" id="{6cd6bb4f-4571-4be7-b51c-37e9a506bb64}">
+		<property name="lowGain">
+			<value>10</value>
+		</property>
+		<property name="midGain">
+			<value>-19</value>
+		</property>
+		<property name="highGain">
+			<value>-58</value>
+		</property>
+		<property name="highCrossover">
+			<value>1900</value>
+		</property>
+	</object>
 	<object class="MixerBusFader" id="{8ae486a9-3cf6-445d-912c-94147679d482}" />
 </objects>
