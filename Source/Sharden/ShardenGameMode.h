@@ -34,6 +34,21 @@ public:
 
     void RegisterPlayerHit();
 
+    UFUNCTION(BlueprintCallable)
+    void ResetHitpoints();
+
+    UFUNCTION(BlueprintCallable)
+    void ReceiveDamage(int32 InDamage);
+
+    UFUNCTION(BlueprintCallable)
+    void HealUp(int32 InHeal);
+
+    UFUNCTION(BlueprintImplementableEvent)
+    void OnGameLost();
+
+    UFUNCTION(BlueprintImplementableEvent)
+    void OnGameWon();
+
 public:
     UPROPERTY(EditAnywhere)
     TSubclassOf<class AObstacle> ObstacleClass;
@@ -42,8 +57,10 @@ public:
     float GroundRadius = 3000.0f;
 
 private:
+    int32 HitPoints = 100;
     float PlayTime = 0.0f;
     float SpawnTime = 0.0f;
+    bool GameRunning = false;
     bool ObstaclesSpawnable = false;
     USpawnData* CurrentSpawnParameters;
 };

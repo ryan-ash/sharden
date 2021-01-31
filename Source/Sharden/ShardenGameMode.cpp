@@ -9,6 +9,11 @@ void AShardenGameMode::Tick_Impl(float DeltaSeconds)
     SpawnTime += DeltaSeconds;
     PlayTime += DeltaSeconds;
 
+    if (!GameRunning)
+    {
+        return;
+    }
+
     if (!CurrentSpawnParameters)
     {
         UE_LOG(LogTemp, Error, TEXT("Spawn parameters nullptr!"));
@@ -17,7 +22,9 @@ void AShardenGameMode::Tick_Impl(float DeltaSeconds)
 
     if (PlayTime > CurrentSpawnParameters->PlayTime)
     {
-        // TODO: Win
+        PlayEnd();
+        OnGameWon();
+        return;
     }
     const float DifficultyValue = CurrentSpawnParameters->DifficultyCurve->GetFloatValue(PlayTime);
     if (SpawnTime > CurrentSpawnParameters->SpawnTime / DifficultyValue)
@@ -34,18 +41,20 @@ void AShardenGameMode::SetObstaclesSpawnable(bool Spawnable)
 
 void AShardenGameMode::RegisterPlayerHit()
 {
-    PlayEnd();
-    PlayStart();
+    ReceiveDamage(CurrentSpawnParameters->DamageValue);
 }
 
 void AShardenGameMode::PlayStart()
 {
     PlayTime = 0.0f;
+    GameRunning = true;
+    ResetHitpoints();
     SetObstaclesSpawnable(true);
 }
 
 void AShardenGameMode::PlayEnd()
 {
+    GameRunning = false;
     SetObstaclesSpawnable(false);
     TArray<AActor*> FoundActors;
     UGameplayStatics::GetAllActorsOfClass(GetWorld(), ObstacleClass, FoundActors);
@@ -96,4 +105,28 @@ void AShardenGameMode::SpawnObstacle()
 void AShardenGameMode::SetSpawnParameters(USpawnData* Params)
 {
     CurrentSpawnParameters = Params;
+}
+
+void AShardenGameMode::HealUp(int32 InHeal)
+{
+    HitPoints += InHeal;
+    if (HitPoints > CurrentSpawnParameters->TotalHitPoints)
+    {
+        HitPoints = CurrentSpawnParameters->TotalHitPoints;
+    }
+}
+
+void AShardenGameMode::ReceiveDamage(int32 InDamage)
+{
+    HitPoints -= InDamage;
+    if (HitPoints <= 0)
+    {
+        PlayEnd();
+        OnGameLost();
+    }
+}
+
+void AShardenGameMode::ResetHitpoints()
+{
+    HitPoints = CurrentSpawnParameters->TotalHitPoints;
 }
