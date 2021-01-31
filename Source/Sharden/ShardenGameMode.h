@@ -32,9 +32,12 @@ public:
 
     UFUNCTION(BlueprintCallable)
     void SetSpawnParameters(USpawnData* Params);
-    
+
     UFUNCTION(BlueprintCallable)
     void RegisterPlayerHit();
+
+    UFUNCTION(BlueprintCallable)
+    void RegisterPlayerHeal();
 
     UFUNCTION(BlueprintCallable)
     void ResetHitpoints();

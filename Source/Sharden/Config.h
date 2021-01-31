@@ -42,7 +42,9 @@ public:
     UPROPERTY(EditAnywhere, Category = Obstacle)
     int32 MaxHitPoints = 100;
     UPROPERTY(EditAnywhere, Category = Obstacle)
-    int32 DamageValue = 20;
+    int32 DamageValue = 10;
+    UPROPERTY(EditAnywhere, Category = Obstacle)
+    int32 HealValue = 10;
     UPROPERTY(EditAnywhere, Category = Obstacle)
     float SpawnTime = 2.5f;
     UPROPERTY(EditAnywhere, Category = Obstacle)

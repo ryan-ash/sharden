@@ -44,6 +44,11 @@ void AShardenGameMode::RegisterPlayerHit()
     ReceiveDamage(CurrentSpawnParameters->DamageValue);
 }
 
+void AShardenGameMode::RegisterPlayerHeal()
+{
+    HealUp(CurrentSpawnParameters->HealValue);    
+}
+
 void AShardenGameMode::PlayStart()
 {
     PlayTime = 0.0f;

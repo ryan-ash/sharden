@@ -21,6 +21,10 @@ public:
     void OnSendDiraction(const FVector& Diraction);
     UFUNCTION(BlueprintCallable)
     void ResetCanInteract();
+
+    UFUNCTION(BlueprintCallable)
+    void Collapse();
+
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Event)
     bool Destructible = true;
 
@@ -29,6 +33,9 @@ protected:
 
     UFUNCTION(BlueprintImplementableEvent)
     void GetWhipDiraction(const FVector& Diraction);
+
+    UFUNCTION(BlueprintImplementableEvent)
+    void CollapseEvent();
 
 public:
     virtual void Tick(float DeltaTime) override;

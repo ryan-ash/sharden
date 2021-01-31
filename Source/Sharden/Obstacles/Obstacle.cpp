@@ -88,3 +88,14 @@ void AObstacle::ResetCanInteract()
 {
 	CanInteract = true;
 }
+
+void AObstacle::Collapse()
+{
+	const auto GM = GetWorld()->GetAuthGameMode<AShardenGameMode>();
+	if (GM)
+	{
+		GM->RegisterPlayerHeal();
+	}
+	EndWhipeInteract.Broadcast();
+	CollapseEvent();	
+}
