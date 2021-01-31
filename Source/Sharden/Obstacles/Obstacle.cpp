@@ -21,7 +21,10 @@ void AObstacle::BeginPlay()
 void AObstacle::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	ProcessMovement(DeltaTime);
+	if(Destructible)
+	{
+		ProcessMovement(DeltaTime);
+	}
 }
 
 void AObstacle::OnOverlap(AActor* OtherActor)
@@ -70,4 +73,32 @@ void AObstacle::SetSpeed(float InSpeed)
 void AObstacle::SetRadius(float InRadius)
 {
 	Radius = InRadius;
+}
+
+void AObstacle::OnSendDiraction(const FVector& Diraction)
+{
+	if(CanInteract)
+	{
+		GetWhipDiraction(Diraction);
+		CanInteract = false;
+		EndWhipeInteract.Broadcast();
+	}
+}
+void AObstacle::ResetCanInteract()
+{
+	CanInteract = true;
+}
+
+void AObstacle::Collapse()
+{
+	if(!Destructible)
+	{
+		const auto GM = GetWorld()->GetAuthGameMode<AShardenGameMode>();
+		if (GM)
+		{
+			GM->RegisterPlayerHeal();
+		}
+		EndWhipeInteract.Broadcast();
+		CollapseEvent();
+	}	
 }
