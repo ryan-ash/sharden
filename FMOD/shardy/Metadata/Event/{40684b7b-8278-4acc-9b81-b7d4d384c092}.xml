@@ -90,13 +90,19 @@
 	<object class="MixerBusPanner" id="{dbd6a8a4-7ba6-480f-9e0b-effc13b58582}" />
 	<object class="SingleSound" id="{06d765f1-7515-4b3b-85ab-8b4979b1fa62}">
 		<property name="length">
-			<value>0.34977324263038551</value>
+			<value>0.30477324263038552</value>
+		</property>
+		<property name="timelockedOffset">
+			<value>0.044999999999999998</value>
 		</property>
 		<relationship name="audioFile">
 			<destination>{0468bb21-4596-42fb-a23a-293f0e6fbcdf}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{65ce4244-49e2-4e8e-9006-e3e6321725a8}">
+		<property name="volume">
+			<value>-20</value>
+		</property>
 		<property name="name">
 			<value>Audio 1</value>
 		</property>
@@ -121,10 +127,71 @@
 	<object class="MixerBusEffectChain" id="{649385e0-518b-4cb4-817e-f5aa78064452}">
 		<relationship name="effects">
 			<destination>{6a2bc926-b5e0-4bcb-abf3-02d63db6f1a5}</destination>
+			<destination>{085af05d-9f62-457b-a505-bd4800e8dc05}</destination>
+			<destination>{bcacd22a-9385-46c6-9077-56e08c8ad895}</destination>
+			<destination>{8a564cd0-59e2-4ebf-a462-bdb4d1fd3a55}</destination>
+			<destination>{28b29db0-6575-418a-b3ff-e6df87cc227a}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{dbc57b8c-4852-4c2c-aa65-acdf4db66534}" />
 	<object class="MixerBusFader" id="{0f923121-fdcc-4d33-b7c1-77df13da2476}" />
 	<object class="SpatialiserEffect" id="{a3f4270c-ab4d-4af3-b009-7f3f5e1bb5c2}" />
 	<object class="MixerBusFader" id="{6a2bc926-b5e0-4bcb-abf3-02d63db6f1a5}" />
+	<object class="PitchShifterEffect" id="{085af05d-9f62-457b-a505-bd4800e8dc05}">
+		<property name="pitch">
+			<value>0.790000081</value>
+		</property>
+		<relationship name="modulators">
+			<destination>{efc553e5-f419-4047-9018-4d37d5774be7}</destination>
+		</relationship>
+	</object>
+	<object class="FlangerEffect" id="{bcacd22a-9385-46c6-9077-56e08c8ad895}">
+		<property name="mix">
+			<value>96</value>
+		</property>
+		<relationship name="modulators">
+			<destination>{6bb96d65-90f9-4074-bffc-0dd236efe8d2}</destination>
+		</relationship>
+	</object>
+	<object class="DistortionEffect" id="{8a564cd0-59e2-4ebf-a462-bdb4d1fd3a55}">
+		<property name="level">
+			<value>0.935000062</value>
+		</property>
+	</object>
+	<object class="SFXReverbEffect" id="{28b29db0-6575-418a-b3ff-e6df87cc227a}">
+		<property name="decayTime">
+			<value>650</value>
+		</property>
+		<property name="density">
+			<value>88</value>
+		</property>
+		<property name="lowShelfGain">
+			<value>5</value>
+		</property>
+		<property name="highCut">
+			<value>20</value>
+		</property>
+		<property name="wetLevel">
+			<value>10</value>
+		</property>
+		<property name="dryLevel">
+			<value>-80</value>
+		</property>
+	</object>
+	<object class="RandomizerModulator" id="{efc553e5-f419-4047-9018-4d37d5774be7}">
+		<property name="nameOfPropertyBeingModulated">
+			<value>pitch</value>
+		</property>
+		<property name="amount">
+			<value>19</value>
+		</property>
+	</object>
+	<object class="RandomizerModulator" id="{6bb96d65-90f9-4074-bffc-0dd236efe8d2}">
+		<property name="nameOfPropertyBeingModulated">
+			<value>rate</value>
+		</property>
+		<property name="amount">
+			<value>21</value>
+		</property>
+	</object>
 </objects>

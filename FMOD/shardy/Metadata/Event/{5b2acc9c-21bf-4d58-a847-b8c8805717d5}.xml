@@ -72,6 +72,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerMaster" id="{39769db9-abac-40b8-834f-9a1eeac1c3da}">
+		<property name="volume">
+			<value>3.5</value>
+		</property>
 		<relationship name="effectChain">
 			<destination>{5fb89e56-9985-4c06-8a6b-e07d3ef9e25d}</destination>
 		</relationship>
@@ -114,6 +117,7 @@
 		<relationship name="effects">
 			<destination>{4de3bdc6-0180-4835-8262-9a5de3888279}</destination>
 			<destination>{2d63f37d-9205-4868-93be-88f83168a4b1}</destination>
+			<destination>{8e3dace3-5b01-4237-935f-dd84d6bbfe75}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{5b791e0d-0ea2-4d63-8388-c4ebde618b55}" />
@@ -125,6 +129,30 @@
 	</object>
 	<object class="MixerBusPanner" id="{6b235990-45ae-4e04-9fff-61a597e80507}" />
 	<object class="MixerBusFader" id="{4de3bdc6-0180-4835-8262-9a5de3888279}" />
-	<object class="SpatialiserEffect" id="{2d63f37d-9205-4868-93be-88f83168a4b1}" />
+	<object class="SpatialiserEffect" id="{2d63f37d-9205-4868-93be-88f83168a4b1}">
+		<property name="distanceRolloffType">
+			<value>3</value>
+		</property>
+		<property name="extentMode">
+			<value>1</value>
+		</property>
+		<property name="soundSize">
+			<value>4.30000019</value>
+		</property>
+		<property name="minimumExtent">
+			<value>60</value>
+		</property>
+	</object>
+	<object class="FlangerEffect" id="{8e3dace3-5b01-4237-935f-dd84d6bbfe75}">
+		<property name="rate">
+			<value>2.39999986</value>
+		</property>
+		<property name="delay">
+			<value>0.390000015</value>
+		</property>
+		<property name="mix">
+			<value>100</value>
+		</property>
+	</object>
 	<object class="MixerBusFader" id="{7dade8c0-54ad-40df-ac7e-249254063e06}" />
 </objects>
