@@ -42,6 +42,7 @@ public:
     float GroundRadius = 3000.0f;
 
 private:
+    float PlayTime = 0.0f;
     float SpawnTime = 0.0f;
     bool ObstaclesSpawnable = false;
     USpawnData* CurrentSpawnParameters;

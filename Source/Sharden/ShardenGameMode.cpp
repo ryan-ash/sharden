@@ -7,15 +7,22 @@
 void AShardenGameMode::Tick_Impl(float DeltaSeconds)
 {
     SpawnTime += DeltaSeconds;
+    PlayTime += DeltaSeconds;
 
     if (!CurrentSpawnParameters)
     {
         UE_LOG(LogTemp, Error, TEXT("Spawn parameters nullptr!"));
         return;
     }
-    if (SpawnTime > CurrentSpawnParameters->SpawnTime)
+
+    if (PlayTime > CurrentSpawnParameters->PlayTime)
     {
-        SpawnTime /= CurrentSpawnParameters->SpawnTime;
+        // TODO: Win
+    }
+    const float DifficultyValue = CurrentSpawnParameters->DifficultyCurve->GetFloatValue(PlayTime);
+    if (SpawnTime > CurrentSpawnParameters->SpawnTime / DifficultyValue)
+    {
+        SpawnTime = 0.0f;
         SpawnObstacle();
     }
 }
@@ -33,6 +40,7 @@ void AShardenGameMode::RegisterPlayerHit()
 
 void AShardenGameMode::PlayStart()
 {
+    PlayTime = 0.0f;
     SetObstaclesSpawnable(true);
 }
 
