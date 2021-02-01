@@ -50,10 +50,6 @@ public:
     UPROPERTY(EditAnywhere, Category = Obstacle)
     float Width = 500.0f;
     UPROPERTY(EditAnywhere, Category = Obstacle)
-    int32 MinCount = 1;
-    UPROPERTY(EditAnywhere, Category = Obstacle)
-    int32 MaxCount = 3;
-    UPROPERTY(EditAnywhere, Category = Obstacle)
     int32 MaxFragments = 20;
     UPROPERTY(EditAnywhere, Category = Obstacle)
     TArray <TSubclassOf<class AObstacle>> Obstacles;

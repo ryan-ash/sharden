@@ -25,7 +25,7 @@ public:
     void PlayEnd();
 
     UFUNCTION(BlueprintCallable)
-    void SpawnObstacle();
+    void SpawnObstacle(int32 MaxCount);
 
     UFUNCTION(BlueprintCallable)
     void SetObstaclesSpawnable(bool Spawnable);
@@ -79,8 +79,8 @@ public:
 private:
 
     int32 HitPoints = 100;
-    float PlayTime = 0.0f;
-    float SpawnTime = 0.0f;
+    clock_t TimeAtTheStart = 0.f;
+    clock_t LastSpawnTime = 0.f;
     bool GameRunning = false;
     bool ObstaclesSpawnable = false;
     USpawnData* CurrentSpawnParameters;

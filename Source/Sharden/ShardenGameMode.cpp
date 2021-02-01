@@ -1,13 +1,17 @@
 #include "ShardenGameMode.h"
 
+#include <ctime>
+#include <time.h>
+
 #include <Kismet/GameplayStatics.h>
+#include <Misc/DateTime.h>
 
 #include "Sharden/Obstacles/Obstacle.h"
 
 void AShardenGameMode::Tick_Impl(float DeltaSeconds)
 {
-    SpawnTime += DeltaSeconds;
-    PlayTime += DeltaSeconds;
+    const float PlayTime = float(clock() - TimeAtTheStart)  / CLOCKS_PER_SEC;
+    const float SpawnTime = float(clock() - LastSpawnTime)  / CLOCKS_PER_SEC;
 
     if (!GameRunning)
     {
@@ -27,10 +31,10 @@ void AShardenGameMode::Tick_Impl(float DeltaSeconds)
         return;
     }
     const float DifficultyValue = CurrentSpawnParameters->DifficultyCurve->GetFloatValue(PlayTime);
-    if (SpawnTime > CurrentSpawnParameters->SpawnTime / DifficultyValue)
+    if (SpawnTime > CurrentSpawnParameters->SpawnTime)
     {
-        SpawnTime = 0.0f;
-        SpawnObstacle();
+        LastSpawnTime = clock();
+        SpawnObstacle(DifficultyValue);
     }
 }
 
@@ -51,7 +55,7 @@ void AShardenGameMode::RegisterPlayerHeal()
 
 void AShardenGameMode::PlayStart()
 {
-    PlayTime = 0.0f;
+    TimeAtTheStart = clock();
     GameRunning = true;
     ResetHitpoints();
     SetObstaclesSpawnable(true);
@@ -69,7 +73,7 @@ void AShardenGameMode::PlayEnd()
     }
 }
 
-void AShardenGameMode::SpawnObstacle()
+void AShardenGameMode::SpawnObstacle(int32 MaxCount)
 {
     if (!ObstaclesSpawnable)
     {
@@ -82,7 +86,8 @@ void AShardenGameMode::SpawnObstacle()
         return;
     }
 
-    const int32 SpawnCount = FMath::RandRange(CurrentSpawnParameters->MinCount, CurrentSpawnParameters->MaxCount);
+    const int32 MinCount = MaxCount == 0 ? 0 : 1;
+    const int32 SpawnCount = FMath::RandRange(MinCount, MaxCount);
 
     for (int i = 0; i < SpawnCount; ++i)
     {
